@@ -1,1 +1,1 @@
-include ':app'
+include ':app', ':component-home', ':component-knowledge_system', ':component-navigation', ':component-project', ':modules-services-api'

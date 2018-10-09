@@ -9,6 +9,11 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/component-home" />
+            <option value="$PROJECT_DIR$/component-knowledge_system" />
+            <option value="$PROJECT_DIR$/component-navigation" />
+            <option value="$PROJECT_DIR$/component-project" />
+            <option value="$PROJECT_DIR$/modules-services-api" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
