@@ -1,15 +1,14 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
-
-
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -25,12 +24,97 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //base
+    api rootProject.ext.dependencies["appcompat-v7"]
+    api rootProject.ext.dependencies["cardview-v7"]
+    api rootProject.ext.dependencies["design"]
+    api rootProject.ext.dependencies["constraint-layout"]
 
-    api project(':modules-services-api')
+    //ui
+    api rootProject.ext.dependencies["SmartRefreshLayout"]
+    api rootProject.ext.dependencies["SmartRefreshHeader"]
+    api rootProject.ext.dependencies["banner"]
+    api rootProject.ext.dependencies["FlycoTabLayout_Lib"]
+    api rootProject.ext.dependencies["VerticalTabLayout"]
+    api rootProject.ext.dependencies["flowlayout-lib"]
+    api rootProject.ext.dependencies["agentweb"]
+
+    //net
+    api rootProject.ext.dependencies["gson"]
+    api rootProject.ext.dependencies["okhttp"]
+    api rootProject.ext.dependencies["logging-interceptor"]
+    api rootProject.ext.dependencies["retrofit"]
+    api rootProject.ext.dependencies["converter-gson"]
+    api rootProject.ext.dependencies["adapter-rxjava2"]
+    api rootProject.ext.dependencies["glide"]
+    annotationProcessor rootProject.ext.dependencies["glide_compiler"]
+
+    //dao
+    api rootProject.ext.dependencies["greendao"]
+
+    //rx
+    api rootProject.ext.dependencies["rxjava"]
+    api rootProject.ext.dependencies["rxandroid"]
+    api rootProject.ext.dependencies["rxbinding"]
+    api rootProject.ext.dependencies["rxpermissions"]
+
+    //di
+    api rootProject.ext.dependencies["dagger"]
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+    api rootProject.ext.dependencies["dagger-android"]
+    api rootProject.ext.dependencies["dagger-android-support"]
+    annotationProcessor rootProject.ext.dependencies["dagger-android-processor"]
+    api rootProject.ext.dependencies["javax_annotation"]
+    api rootProject.ext.dependencies["butterknife"]
+    annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
+
+    //multidex
+    api rootProject.ext.dependencies["multidex"]
+
+    //canary
+    debugImplementation rootProject.ext.dependencies["leakcanary-android"]
+    releaseImplementation rootProject.ext.dependencies["leakcanary-android-no-op"]
+    testImplementation rootProject.ext.dependencies["leakcanary-android-no-op"]
+
+    //kotlin
+    api rootProject.ext.dependencies["kotlin-stdlib"]
+
+    //other
+    api rootProject.ext.dependencies["lottie"]
+    api rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
+    api rootProject.ext.dependencies["fragmentation"]
+    api rootProject.ext.dependencies["fragmentation-swipeback"]
+    api rootProject.ext.dependencies["crashreport_upgrade"]
+    api rootProject.ext.dependencies["logger"]
+    api rootProject.ext.dependencies["stetho"]
+    api rootProject.ext.dependencies["stetho-okhttp3"]
+
+    //UI测试
+    androidTestImplementation(rootProject.ext.dependencies["espresso-core"]) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    api(rootProject.ext.dependencies["espresso-idling-resource"]) {
+        exclude module: 'support-annotations'
+    }
+    androidTestImplementation rootProject.ext.dependencies["espresso-contrib"]
+    androidTestImplementation rootProject.ext.dependencies["espresso-intents"]
+    androidTestImplementation rootProject.ext.dependencies["espresso-accessibility"]
+    androidTestImplementation rootProject.ext.dependencies["espresso-web"]
+    androidTestImplementation rootProject.ext.dependencies["idling-concurrent"]
+
+    //unit test
+    testImplementation rootProject.ext.dependencies["junit"]
+    testImplementation rootProject.ext.dependencies["mockito"]
+    testImplementation rootProject.ext.dependencies["powermock-module-junit4"]
+    testImplementation rootProject.ext.dependencies["powermock-module-junit4-rule"]
+    testImplementation rootProject.ext.dependencies["powermock-api-mockito2"] //注意这里是mockito2
+    testImplementation rootProject.ext.dependencies["powermock-classloading-xstream"]
+    testImplementation rootProject.ext.dependencies["robolectric"]
+    testImplementation rootProject.ext.dependencies["shadows-support-v4"]
+    testImplementation rootProject.ext.dependencies["shadows-multidex"] //支持Multidex功能
+    androidTestImplementation rootProject.ext.dependencies["runner"]
+
+    implementation project(':modules-services-api')
 }
