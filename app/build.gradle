@@ -122,6 +122,12 @@ dependencies {
     testImplementation rootProject.ext.dependencies["shadows-support-v4"]
     testImplementation rootProject.ext.dependencies["shadows-multidex"] //支持Multidex功能
     androidTestImplementation rootProject.ext.dependencies["runner"]
+
+    //component
+    api project(':component-home')
+    api project(':component-knowledge_system')
+    api project(':component-navigation')
+    api project(':component-project')
 }
 
 //解决支持库版本不兼容问题
